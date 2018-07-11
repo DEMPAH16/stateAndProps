@@ -1,38 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import { connect } from 'react-redux';
-import * as Actions from './Redux/Actions';
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+
+import Cart from './Views/Cart/Cart';
+import Details from './Views/Details/Details';
+import Checkout from './Views/Checkout/Checkout';
+import ProductList from './Views/ProductList/ProductList';
+
+
 import './App.css';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.updateName = this.updateName.bind(this);
-	}
-	updateName() {
-		debugger
-		this.props.updateProp('steve');
-	}
-	// updateName() {
-	// 	const obj = {
-	// 		type: 'abc',
-	// 		payload: 'steve'
-	// 	}
-	// 	this.props.dispatch(obj);
-	// }
 	render() {
-		console.log(this.props)
 		return (
 			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<h1 className="App-title">Welcome to React</h1>
-				</header>
-				<p className="App-intro">{this.props.firstStateProp}</p>
-				<button onClick={this.updateName}>click me</button>
+				<Router>
+					<Switch>
+						<Route path='/Checkout' component={Checkout}/>
+						<Route path='/Cart' component={Cart}/>
+						<Route path='/Details/:id' component={Details}/>
+						<Route path='/' component={ProductList}/>
+					</Switch>
+				</Router>
 			</div>
 		);
 	}
 }
 
-export default connect(state => state, Actions)(App);
+export default App;
